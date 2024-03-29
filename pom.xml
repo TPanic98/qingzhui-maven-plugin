@@ -21,18 +21,16 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.cyclonedx</groupId>
-    <artifactId>cyclonedx-maven-plugin</artifactId>
+    <groupId>org.qingzhui</groupId>
+    <artifactId>qingzhui-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>2.8.0-SNAPSHOT</version>
+    <version>1.0.7</version>
 
-    <name>CycloneDX Maven plugin</name>
-    <description>The CycloneDX Maven plugin generates CycloneDX Software Bill of Materials (SBOM) containing the aggregate of all direct and transitive dependencies of a project.</description>
-    <url>https://github.com/CycloneDX/cyclonedx-maven-plugin</url>
-    <inceptionYear>2017</inceptionYear>
+    <name>QingZhui Maven plugin</name>
+    <description>The QingZhui Maven plugin generates QingZhui Software Bill of Materials (SBOM) of a project.</description>
+    <inceptionYear>2023</inceptionYear>
     <organization>
-        <name>OWASP Foundation</name>
-        <url>https://owasp.org/</url>
+        <name>panic</name>
     </organization>
 
     <licenses>
@@ -41,27 +39,6 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-
-    <developers>
-        <developer>
-            <name>Steve Springett</name>
-            <email>Steve.Springett@owasp.org</email>
-            <organization>OWASP</organization>
-            <organizationUrl>https://www.owasp.org/</organizationUrl>
-            <roles>
-                <role>Architect</role>
-                <role>Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Hervé Boutemy</name>
-            <email>hboutemy@sonatype.com</email>
-            <organization>Sonatype,Apache</organization>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -73,34 +50,6 @@
         <junit5.version>5.10.1</junit5.version>
         <plugin-tools.version>3.11.0</plugin-tools.version>
     </properties>
-
-    <scm>
-        <connection>scm:git:git@github.com:CycloneDX/cyclonedx-maven-plugin.git</connection>
-        <url>https://github.com/CycloneDX/cyclonedx-maven-plugin.git</url>
-        <developerConnection>scm:git:git@github.com:CycloneDX/cyclonedx-maven-plugin.git</developerConnection>
-        <tag>master</tag>
-    </scm>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/CycloneDX/cyclonedx-maven-plugin/issues</url>
-    </issueManagement>
-
-    <ciManagement>
-        <system>GitHub</system>
-        <url>https://github.com/CycloneDX/cyclonedx-maven-plugin/actions</url>
-    </ciManagement>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -250,6 +199,45 @@
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>${plugin-tools.version}</version>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.github.wvengen</groupId>-->
+<!--                <artifactId>proguard-maven-plugin</artifactId>-->
+<!--                <version>2.6.0</version>-->
+<!--                <executions>-->
+<!--                    &lt;!&ndash; 以下配置说明执行mvn的package命令时候，会执行proguard&ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>proguard</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; 就是输入Jar的名称，我们要知道，代码混淆其实是将一个原始的jar，生成一个混淆后的jar，那么就会有输入输出。 &ndash;&gt;-->
+<!--                    <injar>${project.build.finalName}.jar</injar>-->
+<!--                    <inFilter>!META-INF/maven/**</inFilter>-->
+<!--                    &lt;!&ndash; 输出jar名称，输入输出jar同名的时候就是覆盖，也是比较常用的配置。 &ndash;&gt;-->
+<!--                    <outjar>${project.build.finalName}.jar</outjar>-->
+<!--                    &lt;!&ndash; 是否混淆 默认是true &ndash;&gt;-->
+<!--                    <obfuscate>true</obfuscate>-->
+<!--                    &lt;!&ndash; 配置一个文件，通常叫做proguard.cfg,该文件主要是配置options选项，也就是说使用proguard.cfg那么options下的所有内容都可以移到proguard.cfg中 &ndash;&gt;-->
+<!--                    <proguardInclude>${project.basedir}/proguard.cfg</proguardInclude>-->
+<!--                    &lt;!&ndash; 额外的jar包，通常是项目编译所需要的jar &ndash;&gt;-->
+<!--                    <libs>-->
+<!--                        <lib>${java.home}/lib/rt.jar</lib>-->
+<!--                        <lib>${java.home}/lib/jce.jar</lib>-->
+<!--                        <lib>${java.home}/lib/jsse.jar</lib>-->
+<!--                    </libs>-->
+<!--                    &lt;!&ndash; 对输入jar进行过滤比如，如下配置就是对META-INFO文件不处理。 &ndash;&gt;-->
+<!--&lt;!&ndash;                    <inLibsFilter>!META-INF/**</inLibsFilter>&ndash;&gt;-->
+<!--                    &lt;!&ndash; 这是输出路径配置，但是要注意这个路径必须要包括injar标签填写的jar &ndash;&gt;-->
+<!--                    <outputDirectory>${project.basedir}/target</outputDirectory>-->
+<!--                    &lt;!&ndash;这里特别重要，此处主要是配置混淆的一些细节选项，比如哪些类不需要混淆，哪些需要混淆&ndash;&gt;-->
+<!--                    <options>-->
+<!--                        &lt;!&ndash; 可以在此处写option标签配置，不过我上面使用了proguardInclude，故而我更喜欢在proguard.cfg中配置 &ndash;&gt;-->
+<!--                    </options>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.eclipse.sisu</groupId>
                 <artifactId>sisu-maven-plugin</artifactId>
@@ -287,6 +275,24 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>net.roseboy</groupId>-->
+<!--                <artifactId>classfinal-maven-plugin</artifactId>-->
+<!--                <version>1.2.1</version>-->
+<!--                <configuration>-->
+<!--                    <password>#</password>&lt;!&ndash;加密密码，如果是#号，则使用无密码模式加密&ndash;&gt;-->
+<!--                    <packages>org.qingzhui.maven</packages>&lt;!&ndash;加密的包名(可为空,多个用","分割)&ndash;&gt;-->
+<!--                    <cfgfiles>plugin.properties</cfgfiles>&lt;!&ndash;需要加密的配置文件，般是classes目录下的ym或properties文件(可为空，多个用"，"分割)&ndash;&gt;-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>classFinal</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.cyclonedx</groupId>
                 <artifactId>cyclonedx-maven-plugin</artifactId>

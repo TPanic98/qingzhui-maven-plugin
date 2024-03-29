@@ -1,4 +1,4 @@
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import static io.takari.maven.testing.TestResources.assertFilesPresent;
 import static org.junit.Assert.assertTrue;

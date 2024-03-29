@@ -1,4 +1,4 @@
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import java.util.Collection;
 import java.util.List;

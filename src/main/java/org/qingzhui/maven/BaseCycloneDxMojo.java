@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.artifact.Artifact;
@@ -34,7 +34,6 @@ import org.cyclonedx.CycloneDxSchema;
 import org.cyclonedx.exception.GeneratorException;
 import org.cyclonedx.generators.json.BomJsonGenerator;
 import org.cyclonedx.generators.xml.BomXmlGenerator;
-import org.cyclonedx.maven.ProjectDependenciesConverter.BomDependencies;
 import org.cyclonedx.model.Bom;
 import org.cyclonedx.model.Component;
 import org.cyclonedx.model.Dependency;
@@ -245,13 +244,13 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     /**
      * Various messages sent to console.
      */
-    protected static final String MESSAGE_RESOLVING_DEPS = "CycloneDX: Resolving Dependencies";
-    protected static final String MESSAGE_RESOLVING_AGGREGATED_DEPS = "CycloneDX: Resolving Aggregated Dependencies";
-    protected static final String MESSAGE_CREATING_BOM = "CycloneDX: Creating BOM version %s with %d component(s)";
-    static final String MESSAGE_CALCULATING_HASHES = "CycloneDX: Calculating Hashes";
-    protected static final String MESSAGE_WRITING_BOM = "CycloneDX: Writing and validating BOM (%s): %s";
-    protected static final String MESSAGE_ATTACHING_BOM = "           attaching as %s-%s-cyclonedx.%s";
-    protected static final String MESSAGE_VALIDATION_FAILURE = "The BOM does not conform to the CycloneDX BOM standard as defined by the XSD";
+    protected static final String MESSAGE_RESOLVING_DEPS = "QingZhui: Resolving Dependencies";
+    protected static final String MESSAGE_RESOLVING_AGGREGATED_DEPS = "QingZhui: Resolving Aggregated Dependencies";
+    protected static final String MESSAGE_CREATING_BOM = "QingZhui: Creating BOM version %s with %d component(s)";
+    static final String MESSAGE_CALCULATING_HASHES = "QingZhui: Calculating Hashes";
+    protected static final String MESSAGE_WRITING_BOM = "QingZhui: Writing and validating BOM (%s): %s";
+    protected static final String MESSAGE_ATTACHING_BOM = "           attaching as %s-%s-qingzhui.%s";
+    protected static final String MESSAGE_VALIDATION_FAILURE = "The BOM does not conform to the QingZhui BOM standard as defined by the XSD";
 
     /**
      * Maven plugins that deploy artifacts.
@@ -302,9 +301,9 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
         if (shouldSkip()) {
             final String skipReason = getSkipReason();
             if (skipReason != null) {
-                getLog().info("Skipping CycloneDX goal, because " + skipReason);
+                getLog().info("Skipping QingZhui goal, because " + skipReason);
             } else {
-                getLog().info("Skipping CycloneDX goal");
+                getLog().info("Skipping QingZhui goal");
             }
             return;
         }
@@ -444,7 +443,7 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
         }
     }
 
-    protected BomDependencies extractBOMDependencies(MavenProject mavenProject) throws MojoExecutionException {
+    protected ProjectDependenciesConverter.BomDependencies extractBOMDependencies(MavenProject mavenProject) throws MojoExecutionException {
         ProjectDependenciesConverter.MavenDependencyScopes include = new ProjectDependenciesConverter.MavenDependencyScopes(includeCompileScope, includeProvidedScope, includeRuntimeScope, includeTestScope, includeSystemScope);
         return projectDependenciesConverter.extractBOMDependencies(mavenProject, include, excludeTypes);
     }
@@ -475,7 +474,7 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
 
     protected void logParameters() {
         if (verbose && getLog().isInfoEnabled()) {
-            getLog().info("CycloneDX: Parameters");
+            getLog().info("QingZhui: Parameters");
             getLog().info("------------------------------------------------------------------------");
             getLog().info("schemaVersion          : " + schemaVersion().getVersionString());
             getLog().info("includeBomSerialNumber : " + includeBomSerialNumber);

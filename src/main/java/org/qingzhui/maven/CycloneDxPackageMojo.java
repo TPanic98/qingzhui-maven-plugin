@@ -16,14 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.cyclonedx.maven.ProjectDependenciesConverter.BomDependencies;
 import org.cyclonedx.model.Component;
 import org.cyclonedx.model.Dependency;
 
@@ -33,12 +32,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Creates a CycloneDX BOM for each Maven module with {@code war} or {@code ear} packaging.
+ * Creates a QingZhui Bill for each Maven module with {@code war} or {@code ear} packaging.
  *
  * @since 2.4.0
  */
 @Mojo(
-        name = "makePackageBom",
+        name = "makePackageBill",
         defaultPhase = LifecyclePhase.PACKAGE,
         threadSafe = true,
         aggregator = true,
@@ -62,7 +61,7 @@ public class CycloneDxPackageMojo extends BaseCycloneDxMojo {
             }
             getLog().info("Analyzing " + mavenProject.getArtifactId());
 
-            final BomDependencies bomDependencies = extractBOMDependencies(mavenProject);
+            final ProjectDependenciesConverter.BomDependencies bomDependencies = extractBOMDependencies(mavenProject);
             final Map<String, Dependency> projectDependencies = bomDependencies.getDependencies();
 
             final Component projectBomComponent = convertMavenDependency(mavenProject.getArtifact());
@@ -74,6 +73,6 @@ public class CycloneDxPackageMojo extends BaseCycloneDxMojo {
             projectDependencies.forEach(dependencies::putIfAbsent);
         }
 
-        return "makePackageBom";
+        return "makePackageBill";
     }
 }

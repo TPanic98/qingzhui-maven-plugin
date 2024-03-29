@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -28,7 +28,6 @@ import org.apache.maven.shared.dependency.analyzer.ProjectDependencyAnalyzer;
 import org.apache.maven.shared.dependency.analyzer.ProjectDependencyAnalyzerException;
 import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-import org.cyclonedx.maven.ProjectDependenciesConverter.BomDependencies;
 import org.cyclonedx.model.Component;
 import org.cyclonedx.model.Dependency;
 
@@ -37,10 +36,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Creates a CycloneDX BOM for each Maven module with its dependencies.
+ * Creates a QingZhui Bill for each Maven module with its dependencies.
  */
 @Mojo(
-        name = "makeBom",
+        name = "makeBill",
         defaultPhase = LifecyclePhase.PACKAGE,
         threadSafe = true,
         requiresOnline = true
@@ -88,7 +87,7 @@ public class CycloneDxMojo extends BaseCycloneDxMojo {
         return dependencyAnalyzer;
     }
 
-    protected ProjectDependencyAnalysis doProjectDependencyAnalysis(final MavenProject mavenProject, final BomDependencies bomDependencies) throws MojoExecutionException {
+    protected ProjectDependencyAnalysis doProjectDependencyAnalysis(final MavenProject mavenProject, final ProjectDependenciesConverter.BomDependencies bomDependencies) throws MojoExecutionException {
         if (detectUnusedForOptionalScope) {
             final MavenProject localMavenProject = new MavenProject(mavenProject);
             localMavenProject.setArtifacts(new LinkedHashSet<>(bomDependencies.getArtifacts().values()));
@@ -119,7 +118,7 @@ public class CycloneDxMojo extends BaseCycloneDxMojo {
     protected String extractComponentsAndDependencies(final Set<String> topLevelComponents, final Map<String, Component> components, final Map<String, Dependency> dependencies) throws MojoExecutionException {
         getLog().info(MESSAGE_RESOLVING_DEPS);
 
-        final BomDependencies bomDependencies = extractBOMDependencies(getProject());
+        final ProjectDependenciesConverter.BomDependencies bomDependencies = extractBOMDependencies(getProject());
         final Map<String, Dependency> projectDependencies = bomDependencies.getDependencies();
 
         final Component projectBomComponent = convertMavenDependency(getProject().getArtifact());
@@ -130,6 +129,6 @@ public class CycloneDxMojo extends BaseCycloneDxMojo {
 
         projectDependencies.forEach(dependencies::putIfAbsent);
 
-        return "makeBom";
+        return "makeBill";
     }
 }

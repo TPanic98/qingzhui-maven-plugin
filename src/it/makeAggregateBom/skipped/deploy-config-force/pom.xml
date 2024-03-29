@@ -31,8 +31,9 @@
     <build>
       <plugins>
         <plugin>
-          <groupId>org.cyclonedx</groupId>
-          <artifactId>cyclonedx-maven-plugin</artifactId>
+          <groupId>org.qingzhui</groupId>
+          <artifactId>qingzhui-maven-plugin</artifactId>
+            <version>1.0.7</version>
           <configuration>
             <skipNotDeployed>false</skipNotDeployed>
           </configuration>

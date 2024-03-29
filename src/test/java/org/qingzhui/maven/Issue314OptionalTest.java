@@ -1,12 +1,12 @@
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.cyclonedx.maven.TestUtils.getComponentNode;
-import static org.cyclonedx.maven.TestUtils.getElement;
-import static org.cyclonedx.maven.TestUtils.readXML;
+import static org.qingzhui.maven.TestUtils.getComponentNode;
+import static org.qingzhui.maven.TestUtils.getElement;
+import static org.qingzhui.maven.TestUtils.readXML;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

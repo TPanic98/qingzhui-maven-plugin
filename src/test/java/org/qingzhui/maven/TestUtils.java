@@ -1,4 +1,4 @@
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import java.io.File;
 import java.io.IOException;

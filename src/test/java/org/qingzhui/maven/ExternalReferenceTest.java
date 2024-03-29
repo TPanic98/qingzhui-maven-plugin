@@ -1,4 +1,4 @@
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import io.takari.maven.testing.executor.MavenRuntime.MavenRuntimeBuilder;
 import io.takari.maven.testing.executor.MavenVersions;

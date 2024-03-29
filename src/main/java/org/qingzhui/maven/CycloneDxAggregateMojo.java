@@ -16,14 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.cyclonedx.maven.ProjectDependenciesConverter.BomDependencies;
 import org.cyclonedx.model.Component;
 import org.cyclonedx.model.Dependency;
 
@@ -33,12 +32,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Creates a CycloneDX aggregate BOM at build root (with dependencies from the whole multi-modules build), and eventually a BOM for each module.
+ * Creates a  QingZhui aggregate Bill at build root (with dependencies from the whole multi-modules build), and eventually a BOM for each module.
  *
  * @since 2.1.0
  */
 @Mojo(
-        name = "makeAggregateBom",
+        name = "makeAggregateBill",
         defaultPhase = LifecyclePhase.PACKAGE,
         threadSafe = true,
         aggregator = true,
@@ -91,7 +90,7 @@ public class CycloneDxAggregateMojo extends CycloneDxMojo {
         if (excludeTestProject && mavenProject.getArtifactId().contains("test")) {
             shouldExclude = true;
         }
-        if (skipNotDeployed && !BaseCycloneDxMojo.isDeployable(mavenProject)) {
+        if (skipNotDeployed && !isDeployable(mavenProject)) {
             shouldExclude = true;
         }
         return shouldExclude;
@@ -122,7 +121,7 @@ public class CycloneDxAggregateMojo extends CycloneDxMojo {
                 continue;
             }
 
-            final BomDependencies bomDependencies = extractBOMDependencies(mavenProject);
+            final ProjectDependenciesConverter.BomDependencies bomDependencies = extractBOMDependencies(mavenProject);
             final Map<String, Dependency> projectDependencies = bomDependencies.getDependencies();
 
             final Component projectBomComponent = convertMavenDependency(mavenProject.getArtifact());
@@ -136,7 +135,7 @@ public class CycloneDxAggregateMojo extends CycloneDxMojo {
 
         addMavenProjectsAsParentDependencies(reactorProjects, dependencies);
 
-        return "makeAggregateBom";
+        return "makeAggregateBill";
     }
 
     /**

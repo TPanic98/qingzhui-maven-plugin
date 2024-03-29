@@ -1,10 +1,10 @@
-package org.cyclonedx.maven;
+package org.qingzhui.maven;
 
 import java.io.File;
 
-import static org.cyclonedx.maven.TestUtils.getComponentNode;
-import static org.cyclonedx.maven.TestUtils.getDependencyNode;
-import static org.cyclonedx.maven.TestUtils.readXML;
+import static org.qingzhui.maven.TestUtils.getComponentNode;
+import static org.qingzhui.maven.TestUtils.getDependencyNode;
+import static org.qingzhui.maven.TestUtils.readXML;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

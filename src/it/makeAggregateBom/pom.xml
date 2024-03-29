@@ -86,16 +86,16 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.cyclonedx</groupId>
-                <artifactId>cyclonedx-maven-plugin</artifactId>
-                <version>@project.version@</version>
+                <groupId>org.qingzhui</groupId>
+                <artifactId>qingzhui-maven-plugin</artifactId>
+                <version>1.0.7</version>
                 <!-- intentionally use default configuration -->
                 <executions>
                     <execution>
                         <id>cyclonedx-makeAggregateBom</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>makeAggregateBom</goal>
+                            <goal>makeAggregateBill</goal>
                         </goals>
                     </execution>
 
@@ -104,7 +104,7 @@
                         <id>cyclonedx-makeAggregateBom-root-only</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>makeAggregateBom</goal>
+                            <goal>makeAggregateBill</goal>
                         </goals>
                         <configuration>
                             <outputReactorProjects>false</outputReactorProjects>
@@ -117,7 +117,7 @@
                         <id>cyclonedx-makeBom</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>makeBom</goal>
+                            <goal>makeBill</goal>
                         </goals>
                         <configuration>
                             <outputName>bom-makeBom</outputName>
